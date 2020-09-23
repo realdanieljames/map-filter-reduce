@@ -2,12 +2,12 @@
  * // 1.  A. YOU ARE GIVEN AN ARRAY OF NUMBERS BELOW *
  *              //     B. USING REDUCE               *
  *****************************************************/
-//      subtract all of the numbers in the array from an initial number 200
+// subtract all of the numbers in the array from an initial number 200
 // let numbers = [12, 3, 5, 3, 5, 4]
 
-// const subtractedFrom200 = numbers.reduce((accumulator) => {
+// const subtractedFrom200 = numbers.reduce((accumulator, currentValue) => {
 
-//     return (200 - accumulator)
+//     return ( accumulator - currentValue, 200)
 // }
 
 // )
@@ -20,58 +20,53 @@
  *            //  THEN ADD ALL THE RED WINE BOTTLES TOGETHER.            *
  * // // USE ALL THREE METHODS WE LEARNED TODAY AND USE METHOD CHAINING. *
  *************************************************************************/
-// let data = [
-//     {
-//         wineColor: 'red',
-//         year: '1922',
-//         region: 'Bordeaux',
-//         numBottles: 123
-//     },
-//     {
-//         wineColor: 'red',
-//         year: '1972',
-//         region: 'Beaujolais',
-//         numBottles: 29
-//     },
-//     {
-//         wineColor: 'white',
-//         year: '2020',
-//         region: 'Bourgogne',
-//         numBottles: 224
-//     },
-//     {
-//         wineColor: 'white',
-//         year: '1987',
-//         region: 'Merlot',
-//         numBottles: 122
-//     },
-//     {
-//         wineColor: 'white',
-//         year: '1963',
-//         region: 'Rioja',
-//         numBottles: 22
-//     },
-//     {
-//         wineColor: 'red',
-//         year: '1976',
-//         region: 'Napa',
-//         numBottles: 54
-//     }
-// ];
+let data = [
+    {
+        wineColor: 'red',
+        year: '1922',
+        region: 'Bordeaux',
+        numBottles: 123
+    },
+    {
+        wineColor: 'red',
+        year: '1972',
+        region: 'Beaujolais',
+        numBottles: 29
+    },
+    {
+        wineColor: 'white',
+        year: '2020',
+        region: 'Bourgogne',
+        numBottles: 224
+    },
+    {
+        wineColor: 'white',
+        year: '1987',
+        region: 'Merlot',
+        numBottles: 122
+    },
+    {
+        wineColor: 'white',
+        year: '1963',
+        region: 'Rioja',
+        numBottles: 22
+    },
+    {
+        wineColor: 'red',
+        year: '1976',
+        region: 'Napa',
+        numBottles: 54
+    }
+];
 
-// const redWineOnly = data.filter((dataArray) => {
-//     if (dataArray.wineColor === 'red') {
-//         return (dataArray)
-//     }
-// }
-// )
 
-// const allRedWineBottles =
-//     redWineOnly.map((value) =>
-//         value.numBottles).reduce((previousValue, currentValue) =>
-//             previousValue + currentValue)
+// let x =  data
+// .filter(({wineColor}) => wineColor === 'red')
+// .map(( {numBottles }) => numBottles + 500)
+// .reduce((acc, val)=> acc + val);
 
-// console.log('all Red Wine Bottles: ', allRedWineBottles)
+// console.log(x)
+
 
 
 
@@ -83,17 +78,17 @@
 //     - If the Value is a String, use the character Code number for the first letter in the String.
 //     - Use all four arguments in the callback function in your solution
 //     - And a ternary wouldn't hurt
-// const nums1 = [8, 21.3, 16, 55, 22, 44]; // should be 27
-// const nums2 = [11.12, 43, 56, 22, 78, 98, 11]; // should be 49
-// const nums3 = [2, 1222, 3444, 7254, 83.04444, 1111]; // should be 2186
-// const nums4 = [2, 1222, 'sneeze', 3444, 7254, 8, 'abacus']; //should be 1734
+const nums1 = [8, 21.3, 16, 55, 22, 44]; // should be 27
+const nums2 = [11.12, 43, 56, 22, 78, 98, 11]; // should be 49
+const nums3 = [2, 1222, 3444, 7254, 83.04444, 1111]; // should be 2186
+const nums4 = [2, 1222, 'sneeze', 3444, 7254, 8, 'abacus']; //should be 1734
 
-// //  function accepts arrays
+//  function accepts arrays
 
 // const indexAverager = nums1.reduce((accumulatingValue, currentValue, index, array) => 
 // {   let sum = 0
 //     let average = 0
-    
+
 //     // if string presenst , tun char code
 //     return typeof(currentValue) === 'string'? sum = accumulatingValue + currentValue : average = sum / index
 
@@ -102,6 +97,25 @@
 // })
 // console.log(indexAverager)
 
+
+
+function justAverages(arr) {
+    let total = arr.reduce((total, num, index) => {
+        let isNum = typeof num === 'number' ? true : false;
+        if (isNum) {
+            total += num;
+        }
+        else {
+            total += arr[index].charCodeAt(0);
+        }
+        return total
+
+
+    }, 0)
+    return Math.floor(total / arr.length);
+}
+
+console.log(justAverages(nums4))
 
 
 //========================================================================================//
@@ -135,75 +149,75 @@
  *              //       [1,2,UNDEFINED,6] SHOULD BE [5,10,30]               *
  *              //       [1,3,25.5,4,32.9] SHOULD BE [5,15,20]               *
  *****************************************************************************/
-const numbers1 = [1, 2, 3, 4]
-const numbers2 = [1, 2, undefined, 6]
-const numbers3 = [1,3,25.5,4,32.9]
+// const numbers1 = [1, 2, 3, 4]
+// const numbers2 = [1, 2, undefined, 6]
+// const numbers3 = [1,3,25.5,4,32.9]
 
 
-const numbersOnly = function(array){
+// const numbersOnly = function(array){
 
-    const onlyNumbersAllowed =  array.filter(number => typeof(number)==='number')
-    const multiplyNumbersBy5 = onlyNumbersAllowed.map((value, index, array) => {
-        
-        return value * 5
-    })
-    
-    return (multiplyNumbersBy5)
-}
+//     const onlyNumbersAllowed =  array.filter(number => typeof(number)==='number')
+// const multiplyNumbersBy5 = onlyNumbersAllowed.map((value, index, array) => {
 
+    //         return value * 5
+    //     })
 
-console.log('numbers 1: ', numbersOnly(numbers1))
-console.log('numbers 2: ', numbersOnly(numbers2))
-console.log('numbers 3: ', numbersOnly(numbers3))
+    //     return (multiplyNumbersBy5)
+    // }
 
 
+    // console.log('numbers 1: ', numbersOnly(numbers1))
+    // console.log('numbers 2: ', numbersOnly(numbers2))
+    // console.log('numbers 3: ', numbersOnly(numbers3))
 
 
 
-// //========================================================================================//
-//========================================================================================//
-// 6.
 
-// - Count the number times the same element value appears in an array 
-//  - and display your answer in an object 
-//  -with the element as the key 
-// - and the number of times as the value
-// - Use reduce 
-// - and use its second argument to initialize the empty object
-// - The properties in the object will have a string for the key 
-// - and a number for the value
-// - The key in each property 
-// - should be the value in the array we are counting.
-// - The value in the object property \
-// - should be the number of times 
-// - a value appears in the original array.
 
-// const arr1 = [5, 3, 2, 5, 6]; //should be {'5':2,'3':1,'2':1,'6':1}
-// const arr2 = [3, 1, 2, 5, 2, 5, 7, 5] // should be { '1': 1, '2': 2, '3': 1, '5': 3, '7': 1 }
+    // //========================================================================================//
+    //========================================================================================//
+    // 6.
 
-// const numberAppearance = arr1.reduce((accumulativeValue, currentValue, array) => {
-//     let count = 0;
-//     let obj = {}
-    
-//     if(accumulativeValue === accumulativeValue){
+    // - Count the number times the same element value appears in an array 
+    //  - and display your answer in an object 
+    //  -with the element as the key 
+    // - and the number of times as the value
+    // - Use reduce 
+    // - and use its second argument to initialize the empty object
+    // - The properties in the object will have a string for the key 
+    // - and a number for the value
+    // - The key in each property 
+    // - should be the value in the array we are counting.
+    // - The value in the object property \
+    // - should be the number of times 
+    // - a value appears in the original array.
 
-//         count += 1
-//         obj = {
-//             [accumulativeValue]:count
+    // const arr1 = [5, 3, 2, 5, 6]; //should be {'5':2,'3':1,'2':1,'6':1}
+    // const arr2 = [3, 1, 2, 5, 2, 5, 7, 5] // should be { '1': 1, '2': 2, '3': 1, '5': 3, '7': 1 }
 
-//         } 
+    // const numberAppearance = arr1.reduce((accumulativeValue, currentValue, array) => {
+    //     let count = 0;
+    //     let obj = {}
 
-//     }
+    //     if (accumulativeValue === accumulativeValue) {
 
-//     // console.log('value :', accumulativeValue)
-//     // console.log('index :', currentValue)
-//     // console.log('array: ', array)
-//     // console.log('result: ', result)
-//     return obj
-    
-    
-    
-    
-// }
-// )
-// console.log(numberAppearance)
+    //         count += 1
+    //         obj = {
+    //             [accumulativeValue]: count
+
+    //         }
+
+    //     }
+
+    //     // console.log('value :', accumulativeValue)
+    //     // console.log('index :', currentValue)
+    //     // console.log('array: ', array)
+    //     // console.log('result: ', result)
+    //     return obj
+
+
+
+
+    // }
+    // )
+    // console.log(numberAppearance)
